@@ -54,15 +54,18 @@
     </main>
 
     <script defer src="./js/script.js"></script>
+
+    <!-- auto animation formkit library -->
+    <script type="module">
+        import autoAnimate from '/js/auto-animate-formkit.js'
+        autoAnimate(document.getElementById('user-show-move'))
+        autoAnimate(document.getElementById('computer-show-move'))
+    </script>
+
     <!-- <script>
         if (navigator.serviceWorker) {
             navigator.serviceWorker.register('sw.js');
         }
-    </script> -->
-    <!-- <script type="module">
-        import autoAnimate from './js/auto-animate-formkit'
-        autoAnimate(document.getElementById('user-show-move'))
-        autoAnimate(document.getElementById('computer-show-move'))
     </script> -->
 </body>
 </html>
