@@ -7,9 +7,9 @@ const messageBox = document.getElementById('message-box');
 const messageBoxBtn = document.querySelector('#message-box button');
 
 // be aware that the path should be from the index.html not here
-const rockImgUrl = './public/img/rock.png';
-const paperImgUrl = './public/img/paper.png';
-const scissorsImgUrl = './public/img/scissors.png';
+const rockImgUrl = './public/img/rock.webp';
+const paperImgUrl = './public/img/paper.webp';
+const scissorsImgUrl = './public/img/scissors.webp';
 
 // initial state of contents
 const threeDots = `<span class="loading loading-dots loading-lg"></span>`;
