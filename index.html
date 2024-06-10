@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" class="overflow-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/output.css" />
+    <title>Document</title>
+</head>
+<body class="overflow-hidden">
+    
+    <main tabindex="0" class="relative overflow-hidden"> <!-- the tabindex here is required for closing the dropdown to work on fucking safari -->
+
+        <div class="flex md:flex-row flex-col h-screen w-screen *:basis-1/2 divide-y md:divide-x md:divide-y-0">
+
+            <!-- computer sec -->
+            <div class="flex flex-col justify-center items-center text-3xl text-center">
+
+                <!-- theme dropdown -->
+                <div class="dropdown dropdown-hover me-auto ml-2 mt-1">
+                    <div tabindex="0" role="button" class="btn btn-sm m-1 touch-none">
+                        Theme
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                        </svg>                          
+                    </div>
+                    <ul id="theme-dropdown-ul" tabindex="0" class="dropdown-content z-50 menu p-2 shadow rounded-box w-52 space-y-1 bg-base-300">
+                        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Light" value="light"/></li>
+                        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Dark" value="dark"/></li>
+                        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Black" value="black"/></li>
+                        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Cupcake" value="cupcake"/></li>
+                        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Aqua" value="aqua"/></li>
+                        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Night" value="night"/></li>
+                        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Wireframe" value="wireframe"/></li>
+                    </ul>
+                </div>
+
+                <div id="computer-show-move" class="mx-2 m-auto *:size-20">
+                    <!-- content will be populated here -->
+                </div>
+            </div>
+
+            <!-- you sec -->
+            <div id="user-show-move" class="flex justify-center items-center select-none space-x-3 *:cursor-pointer *:size-20">
+                <!-- content will be populated here -->
+            </div>
+
+        </div>
+
+        <!-- message box -->
+        <div id="message-box" class="absolute bottom-[12vh] md:bottom-3 m-auto right-0 left-0 text-center hide">
+            <button class="max-w-fit bg-base-300 py-2 px-4 rounded-box"></button>
+        </div>
+
+    </main>
+
+    <script defer src="./js/script.js"></script>
+    <script>
+        if (navigator.serviceWorker) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+    <!-- <script type="module">
+        import autoAnimate from './js/auto-animate-formkit'
+        autoAnimate(document.getElementById('user-show-move'))
+        autoAnimate(document.getElementById('computer-show-move'))
+    </script> -->
+</body>
+</html>

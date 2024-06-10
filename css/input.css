@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/**
+* message box
+**/
+#message-box {
+    transition: transform .3s cubic-bezier(1, 0, 0, 1);
+}
+
+#message-box.hide {
+    transform: translateY(20vh);
+}
