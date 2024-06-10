@@ -6,18 +6,19 @@ const userShowMove = document.getElementById('user-show-move');
 const messageBox = document.getElementById('message-box');
 const messageBoxBtn = document.querySelector('#message-box button');
 
-const rockImgUrl = '../public/img/rock.png';
-const paperImgUrl = '../public/img/paper.png';
-const scissorsImgUrl = '../public/img/scissors.png';
+// be aware that the path should be from the index.html not here
+const rockImgUrl = './public/img/rock.png';
+const paperImgUrl = './public/img/paper.png';
+const scissorsImgUrl = './public/img/scissors.png';
 
 // initial state of contents
 const threeDots = `<span class="loading loading-dots loading-lg"></span>`;
 computerShowMove.innerHTML = threeDots;
 
 const rockPaperScissors = `
-    <img onclick="playGame('rock');" src="./public/img/rock.png" alt="rock" />
-    <img onclick="playGame('paper');" src="./public/img/paper.png" alt="paper" />
-    <img onclick="playGame('scissors');" src="./public/img/scissors.png" alt="scissors" />`;
+    <img onclick="playGame('rock');" src="${rockImgUrl}" alt="rock" />
+    <img onclick="playGame('paper');" src="${paperImgUrl}" alt="paper" />
+    <img onclick="playGame('scissors');" src="${scissorsImgUrl}" alt="scissors" />`;
 userShowMove.innerHTML = rockPaperScissors;
 
 
