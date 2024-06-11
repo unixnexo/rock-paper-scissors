@@ -11,5 +11,5 @@
 }
 
 #message-box.hide {
-    transform: translateY(20vh);
+    transform: translateY(-20vh);
 }
