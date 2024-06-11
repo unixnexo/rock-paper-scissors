@@ -84,7 +84,7 @@
 
     </main>
 
-    <script defer src="./js/script.js"></script>
+    <script src="./js/script.js"></script>
 
     <!-- auto animation formkit library -->
     <script type="module">
@@ -97,6 +97,12 @@
 
     <!-- storage api and service worker -->
     <script>
+    const updateUi = () => {
+        const activeIc = document.getElementById('offline-mode-stat-ic');
+        activeIc.classList.remove('bg-red-600');
+        activeIc.classList.add('bg-emerald-600');
+    }
+
     const registerServiceWorker = async () => {
         if ("serviceWorker" in navigator) {
             try {
@@ -107,12 +113,11 @@
 
                 if (registration.installing) {
                     console.log("Service worker installed");
+                    updateUi();
+                    
                 } else if (registration.active) {
                     console.log("Service worker active!");
-                    // update ui
-                    const activeIc = document.getElementById('offline-mode-stat-ic');
-                    activeIc.classList.remove('bg-red-600');
-                    activeIc.classList.add('bg-emerald-600');
+                    updateUi();
                 }
 
             } catch (err) {
@@ -124,5 +129,6 @@
     }
     registerServiceWorker()
     </script>
+
 </body>
 </html>
