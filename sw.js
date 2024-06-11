@@ -24,7 +24,7 @@ const cacheMatch = async (request, preloadResponsePromise) => {
         await cache.put(request, networkResponse.clone())
         return networkResponse
     } catch (err) {
-        return new Response('Response not found!');
+        return null
     }
 }
 
