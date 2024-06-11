@@ -3,13 +3,13 @@
  */
 const CACHE_NAME = 'static_cache';
 const STATIC_ASSETS = [
-    '/index.html',
-    '/css/output.css',
-    '/js/script.js',
-    '/js/auto-animate-formkit.js',
-    '/public/img/paper.webp',
-    '/public/img/rock.webp',
-    '/public/img/scissors.webp',
+    './index.html',
+    './css/output.css',
+    './js/script.js',
+    './js/auto-animate-formkit.js',
+    './public/img/paper.webp',
+    './public/img/rock.webp',
+    './public/img/scissors.webp',
 ]
 
 async function preCache() {
