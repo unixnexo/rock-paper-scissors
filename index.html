@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="unixnexo">
+    <meta name="designer" content="unixnexo">
+    <meta name="publisher" content="unixnexo">
+    <meta name="description" content="PLay Rock Paper Scissors against your device's brain offline.">
+    <meta name="keywords" content="offline game, rock paper scissors, offline rock paper scissors">
+    <meta name="robots" content="index,follow">
+    <meta name="distribution" content="web">
+    <meta name="rating" content="general">
+    <meta name="rating" content="safe for kids">
     <link rel="stylesheet" href="./css/output.css" />
-    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="./public/img/icons8-game-94.png">
+    <title>Play offline - Rock Paper Scissors</title>
 </head>
 <body class="overflow-clip">
     
@@ -15,23 +25,44 @@
             <!-- computer sec -->
             <div class="flex flex-col justify-center items-center text-3xl text-center">
 
-                <!-- theme dropdown -->
+                <!-- dropdown -->
                 <div class="dropdown dropdown-hover me-auto ml-2 mt-1">
-                    <div tabindex="0" role="button" class="btn btn-sm m-1 touch-none">
-                        Theme
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                        </svg>                          
-                    </div>
-                    <ul id="theme-dropdown-ul" tabindex="0" class="dropdown-content z-50 menu p-2 shadow rounded-box w-52 space-y-1 bg-base-300">
-                        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Light" value="light"/></li>
-                        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Dark" value="dark"/></li>
-                        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Black" value="black"/></li>
-                        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Cupcake" value="cupcake"/></li>
-                        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Aqua" value="aqua"/></li>
-                        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Night" value="night"/></li>
-                        <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Wireframe" value="wireframe"/></li>
-                    </ul>
+                        <div tabindex="0" role="button" class="btn btn-sm m-1 touch-none">
+                            Options
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>                          
+                        </div>
+                        <ul id="theme-dropdown-ul" tabindex="0" class="dropdown-content z-50 menu p-2 shadow rounded-box w-52 space-y-1 bg-base-300">
+                            <!-- theme -->
+                            <div class="divider">Theme</div>
+                            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Light" value="light"/></li>
+                            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Dark" value="dark"/></li>
+                            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Black" value="black"/></li>
+                            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Cupcake" value="cupcake"/></li>
+                            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Aqua" value="aqua"/></li>
+                            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Night" value="night"/></li>
+                            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Wireframe" value="wireframe"/></li>
+                            <!-- status -->
+                            <div class="divider py-5">Status</div>
+                            <div class="flex justify-between items-center px-3">
+                                <span>Offline mode</span>
+                                <span id="offline-mode-stat-ic" class="bg-red-600 size-3 rounded-full animate-pulse"></span>
+                            </div>
+                            <div class="divider pt-7 pb-5">Match result</div>
+                            <div class="flex justify-between px-3">
+                                <p>Won</p>
+                                <p id="won-res">0</p>
+                            </div>
+                            <div class="flex justify-between px-3">
+                                <p>Lost</p>
+                                <p id="lost-res">0</p>
+                            </div>
+                            <div class="flex justify-between px-3">
+                                <p>Tie</p>
+                                <p id="tie-res">0</p>
+                            </div>
+                        </ul>
                 </div>
 
                 <div id="computer-show-move" class="mx-2 m-auto *:size-20">
@@ -62,36 +93,34 @@
         autoAnimate(document.getElementById('computer-show-move'))
     </script>
 
-    <!-- storage api and service workers -->
+    <!-- storage api and service worker -->
     <script>
-        // if (navigator.serviceWorker) {
-        //     navigator.serviceWorker.register('sw.js');
-        // }
+    const registerServiceWorker = async () => {
+        if ("serviceWorker" in navigator) {
+            try {
+                const registration = await navigator.serviceWorker.register("./sw.js")
+                registration.addEventListener("updatefound", () => {
+                    console.log("New worker being installed => ", registration.installing)
+                })
 
-        // test
-        const registerServiceWorker = async () => {
-            if ("serviceWorker" in navigator) {
-                try {
-                    const registration = await navigator.serviceWorker.register("./sw.js")
-                    registration.addEventListener("updatefound", () => {
-                        alert("New worker being installed => ", registration.installing)
-                    })
-
-                    if (registration.installing) {
-                        alert("Service worker installed");
-                    } else if (registration.active) {
-                        alert("Service worker active!");
-                    }
-
-                } catch (err) {
-                    alert("Registration failed")
+                if (registration.installing) {
+                    console.log("Service worker installed");
+                } else if (registration.active) {
+                    console.log("Service worker active!");
+                    // update ui
+                    const activeIc = document.getElementById('offline-mode-stat-ic');
+                    activeIc.classList.remove('bg-red-600');
+                    activeIc.classList.add('bg-emerald-600');
                 }
-            } else {
-                alert('not supported');
-            }
-        }
 
-        registerServiceWorker()
+            } catch (err) {
+                console.log("Registration failed")
+            }
+        } else {
+            console.log('service worker not supported');
+        }
+    }
+    registerServiceWorker()
     </script>
 </body>
 </html>

@@ -29,6 +29,25 @@ const showHideMessage = (message) => {
 };
 
 // play game
+const wonResShow = document.getElementById('won-res');
+const lostResShow = document.getElementById('lost-res');
+const tieResShow = document.getElementById('tie-res');
+let wonRes = parseInt(localStorage.getItem('wonRes')) || 0;
+let lostRes = parseInt(localStorage.getItem('lostRes')) || 0;
+let tieRes = parseInt(localStorage.getItem('tieRes')) || 0;
+
+wonResShow.innerText = localStorage.getItem('wonRes') || 0;
+lostResShow.innerText = localStorage.getItem('lostRes') || 0;
+tieResShow.innerText = localStorage.getItem('tieRes') || 0;
+
+// save and get from local storage
+const savetoLocalStorage = (resShow, keyName) => {
+    let res = parseInt(localStorage.getItem(keyName)) || 0;
+    res += 1;
+    localStorage.setItem(keyName, res.toString()); 
+    resShow.innerText = res;
+}
+
 let computerMove;
 const playGame = (userMove) => {
 
@@ -57,16 +76,15 @@ const playGame = (userMove) => {
     // check who won
     if (userMove === computerMove) {
         showHideMessage(`<span class="text-yellow-500 font-bold">It's a tie!</span> Both chose ${userMove}.`);
+        savetoLocalStorage(tieResShow, 'tieRes');
 
-    } else if (userMove === 'rock' && computerMove === 'scissors' || 
-                 userMove === 'paper' && computerMove === 'rock' || 
-                 userMove === 'scissors' && computerMove === 'paper') {
+    } else if (userMove === 'rock' && computerMove === 'scissors' || userMove === 'paper' && computerMove === 'rock' || userMove === 'scissors' && computerMove === 'paper') {
         showHideMessage(`<span class="text-emerald-700 font-bold">You win!</span> ${userMove} beats ${computerMove}.`);
+        savetoLocalStorage(wonResShow, 'wonRes');
 
-    } else if (userMove === 'rock' && computerMove === 'paper' || 
-                 userMove === 'paper' && computerMove === 'scissors' || 
-                 userMove === 'scissors' && computerMove === 'rock') {
+    } else if (userMove === 'rock' && computerMove === 'paper' || userMove === 'paper' && computerMove === 'scissors' || userMove === 'scissors' && computerMove === 'rock') {
         showHideMessage(`<span class="text-red-700 font-bold">You lose!</span> ${computerMove} beats ${userMove}.`);
+        savetoLocalStorage(lostResShow, 'lostRes');
 
     } else {
         showHideMessage('Invalid move! Please choose rock, paper, or scissors.');

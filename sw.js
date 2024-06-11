@@ -1,45 +1,11 @@
 /**
- * using storage api and service workers to make the website work offline
+ * using storage api and service workers to make the website work offline,
+ * IMPO: on ios the site should be through HTTPS in order for this to work
  */
-// const CACHE_NAME = 'static_cache';
-// const STATIC_ASSETS = [
-//     './index.html',
-//     './css/output.css',
-//     './js/script.js',
-//     './js/auto-animate-formkit.js',
-//     './public/img/paper.webp',
-//     './public/img/rock.webp',
-//     './public/img/scissors.webp',
-// ]
+const CACHE_NAME = 'STATIC_ASSETS_v1';
 
-// async function preCache() {
-//     const cache = await caches.open(CACHE_NAME);
-//     return cache.addAll(STATIC_ASSETS);
-// }
-
-// self.addEventListener('install', (event) => {
-//     event.waitUntil(preCache());
-// });
-
-// async function fetchAssets(event) {
-//     try {
-//         const response = await fetch(event.request);
-//         return response;
-//     } catch (error) {
-//         console.log('Fetch failed; returning cached asset:', error);
-//         const cache = await caches.open(CACHE_NAME);
-//         return cache.match(event.request);
-//     }
-// }
-
-// self.addEventListener('fetch', (event) => {
-//     event.respondWith(fetchAssets(event));
-// });
-
-
-/////////testing this mother fucker the above code works only when simulating a offline mode
 const addResourcesToCache = async (resources) => {
-    const cache = await caches.open("v1");
+    const cache = await caches.open(CACHE_NAME);
     await cache.addAll(resources);
 }
 
@@ -49,16 +15,16 @@ const cacheMatch = async (request, preloadResponsePromise) => {
     try {
         const preloadResponse = await preloadResponsePromise;
         if (preloadResponse) {
-            const cache = await caches.open("v1")
+            const cache = await caches.open(CACHE_NAME)
             await cache.put(request, preloadResponse.clone())
             return preloadResponse
         }
         const networkResponse = await fetch(request)
-        const cache = await caches.open("v1")
+        const cache = await caches.open(CACHE_NAME)
         await cache.put(request, networkResponse.clone())
         return networkResponse
     } catch (err) {
-        return new Response("Response not found!")
+        return new Response('Response not found!');
     }
 }
 
@@ -76,7 +42,7 @@ self.addEventListener("install", (event) => {
 })
 
 self.addEventListener("activate", event => {
-    event.waitUntil(clients.claim().then(() => alert("SW has claimed all the clients")))
+    event.waitUntil(clients.claim().then(() => console.log("SW has claimed all the clients")))
     event.waitUntil(async () => {
         if (self.registration.navigationPreload) {
             await self.registration.navigationPreload.enable();
