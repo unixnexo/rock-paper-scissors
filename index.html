@@ -89,8 +89,10 @@
     <!-- auto animation formkit library -->
     <script type="module">
         import autoAnimate from './js/auto-animate-formkit.js'
-        autoAnimate(document.getElementById('user-show-move'))
-        autoAnimate(document.getElementById('computer-show-move'))
+        document.addEventListener('DOMContentLoaded', () => {
+            autoAnimate(document.getElementById('user-show-move'))
+            autoAnimate(document.getElementById('computer-show-move'))
+        })
     </script>
 
     <!-- storage api and service worker -->
