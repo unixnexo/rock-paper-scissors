@@ -20,6 +20,14 @@
     
     <main tabindex="0" class="relative overflow-clip"> <!-- the tabindex here is required for closing the dropdown to work on fucking safari -->
 
+        <!-- redirect to online version - play with a mate -->
+        <a href="https://rpsgame.pythonanywhere.com/" class="flex items-center space-x-2 bg-base-300 absolute right-3 top-3.5 z-50 btn btn-sm" title="You'll be redirected to another web page">
+            <span>Play with a mate</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+            </svg>              
+        </a>
+
         <div class="flex md:flex-row flex-col h-screen w-screen *:basis-1/2 divide-y md:divide-x md:divide-y-0">
 
             <!-- computer sec -->
@@ -51,11 +59,11 @@
                             </div>
                             <div class="divider pt-7 pb-5">Match result</div>
                             <div class="flex justify-between px-3">
-                                <p>Won</p>
+                                <p>Win</p>
                                 <p id="won-res">0</p>
                             </div>
                             <div class="flex justify-between px-3">
-                                <p>Lost</p>
+                                <p>lost</p>
                                 <p id="lost-res">0</p>
                             </div>
                             <div class="flex justify-between px-3">
